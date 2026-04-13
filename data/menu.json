@@ -1,9 +1,55 @@
 {
-  "updatedAt": null,
-  "source": "stjacademy.campus-dining.com",
+  "updatedAt": "2026-04-13T17:55:06.750Z",
+  "source": "menus.tenkites.com",
+  "menuDate": "2026-04-13",
   "menus": {
-    "Breakfast": [],
-    "Lunch": [],
-    "Dinner": []
+    "breakfast": {
+      "classicKitchen": [
+        "Sandwich Biscuit Bacon/Egg/Cheese IW 5.8",
+        "Egg and Cheese Biscuit",
+        "Sausage & Cheese Biscuit"
+      ],
+      "globalFare": [
+        "Scrambled Eggs",
+        "Buttermilk Pancake(s)",
+        "Sausage Patty",
+        "Hashbrown Patty"
+      ]
+    },
+    "lunch": {
+      "classicKitchen": [
+        "Noodles Ramen Vegetarian Miso",
+        "Pork Ramen Noodle Bowl",
+        "Pork With Orange & Ginger",
+        "Broccoli & Mushroom Vegetarian Stir Fry",
+        "Noodle Ramen Cooked"
+      ],
+      "globalFare": [
+        "Furikake",
+        "Huli Huli Chicken",
+        "Broccoli & Mushroom Vegetarian Stir Fry",
+        "Black Beans",
+        "Seasoned French Fries"
+      ]
+    },
+    "dinner": {
+      "classicKitchen": [
+        "Seasoned Ground Beef",
+        "Roll Dinner Hawaiian",
+        "Red Skin Mashed Potatoes",
+        "Sautéed Corn and Onions",
+        "Peas & Carrots",
+        "Brown Gravy",
+        "Green Salad"
+      ],
+      "globalFare": [
+        "Vegetable & Pork Potsticker",
+        "Potsticker Vegetable 1 Oz Fzn App",
+        "Chicken Potstickers",
+        "Vegetable Egg Roll",
+        "Sugar Snap Peas with Red Peppers",
+        "Fortune Cookie"
+      ]
+    }
   }
 }

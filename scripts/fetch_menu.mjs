@@ -1,77 +1,115 @@
 import fs from "node:fs/promises";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { load } from "cheerio";
 
-const URL = "https://stjacademy.campus-dining.com/menus/";
+const execFileAsync = promisify(execFile);
+
+const MENU_URL = "https://menus.tenkites.com/eliorna/d0358";
 const OUT = "data/menu.json";
 
 const uniq = (arr) => [...new Set(arr.map((s) => s.trim()).filter(Boolean))];
+const norm = (s) => s.trim().toLowerCase().replace(/\s+/g, " ");
 
-/** Headers closer to a real browser; some CDNs/WAFs reject bare fetch defaults. */
-const BROWSER_HEADERS = {
-  "user-agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-  accept:
-    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-  "accept-language": "en-US,en;q=0.9",
-  "upgrade-insecure-requests": "1",
-  "sec-fetch-dest": "document",
-  "sec-fetch-mode": "navigate",
-  "sec-fetch-site": "none",
-  "sec-fetch-user": "?1",
-  referer: "https://stjacademy.campus-dining.com/"
-};
+async function fetchHtml(url) {
+  const { stdout } = await execFileAsync("curl", ["-sS", "-A", "Mozilla/5.0", url], {
+    maxBuffer: 20 * 1024 * 1024
+  });
+  return stdout;
+}
 
-function logFailedResponse(res, body) {
-  const preview = body.slice(0, 800).replace(/\s+/g, " ").trim();
-  console.error(`Fetch failed: HTTP ${res.status} ${res.statusText}`);
-  for (const h of ["cf-ray", "server", "www-authenticate", "x-request-id"]) {
-    const v = res.headers.get(h);
-    if (v) console.error(`  ${h}: ${v}`);
+function parseBaseMeta(html) {
+  const dateMatch = html.match(/k10\.settings\.menu\.date\s*=\s*'([^']+)'/);
+  const locationMatch = html.match(/k10\.settings\.menu\.location\.guid\s*=\s*'([^']+)'/);
+
+  if (!dateMatch || !locationMatch) {
+    throw new Error("Cannot parse menu date/location from source HTML");
   }
-  console.error(`  body preview (${preview.length} chars):`, preview || "(empty)");
+
+  const $ = load(html);
+  const mealIds = {};
+
+  $(".k10-menu-selector__option").each((_, el) => {
+    const name = norm($(el).text());
+    const id = ($(el).attr("data-menu-identifier") || "").trim();
+    if (name && id) mealIds[name] = id;
+  });
+
+  return {
+    date: dateMatch[1],
+    locationGuid: locationMatch[1],
+    mealIds
+  };
+}
+
+function buildMenuUrl({ locationGuid, date, menuGuid }) {
+  const u = new URL(MENU_URL);
+  u.searchParams.set("cl", "true");
+  u.searchParams.set("mguid", locationGuid);
+  u.searchParams.set("mldate", date);
+  u.searchParams.set("mlguid", menuGuid);
+  u.searchParams.set("internalrequest", "true");
+  return u.toString();
+}
+
+function extractSectionItems(html, sectionName) {
+  const $ = load(html);
+  const target = norm(sectionName);
+
+  const $course = $(".k10-course.k10-course_level_1").filter((_, el) => {
+    const title = norm($(el).find(".k10-course__name_level_1").first().text());
+    return title === target;
+  }).first();
+
+  if ($course.length === 0) return [];
+
+  return uniq(
+    $course.find(".k10-recipe__name").map((_, el) => $(el).text()).get()
+  );
 }
 
 async function main() {
-  const res = await fetch(URL, { headers: BROWSER_HEADERS });
-  const html = await res.text();
+  const baseHtml = await fetchHtml(MENU_URL);
+  const { date, locationGuid, mealIds } = parseBaseMeta(baseHtml);
 
-  if (!res.ok) {
-    logFailedResponse(res, html);
-    throw new Error(`HTTP ${res.status}`);
+  const mealPlan = [
+    { key: "breakfast", label: "breakfast" },
+    { key: "lunch", label: "lunch" },
+    { key: "dinner", label: "dinner" }
+  ];
+
+  const menus = {
+    breakfast: { classicKitchen: [], globalFare: [] },
+    lunch: { classicKitchen: [], globalFare: [] },
+    dinner: { classicKitchen: [], globalFare: [] }
+  };
+
+  for (const meal of mealPlan) {
+    const menuGuid = mealIds[meal.label];
+    if (!menuGuid) continue;
+
+    const mealHtml = await fetchHtml(buildMenuUrl({ locationGuid, date, menuGuid }));
+    menus[meal.key] = {
+      classicKitchen: extractSectionItems(mealHtml, "Classic Kitchen"),
+      globalFare: extractSectionItems(mealHtml, "Global Fare")
+    };
   }
-  const $ = load(html);
 
-  // 第一版选择器，后续可按页面结构微调
-  const breakfast = uniq(
-    $(".breakfast .menu-item, [data-meal='breakfast'] .menu-item")
-      .map((_, el) => $(el).text())
-      .get()
-  );
-  const lunch = uniq(
-    $(".lunch .menu-item, [data-meal='lunch'] .menu-item")
-      .map((_, el) => $(el).text())
-      .get()
-  );
-  const dinner = uniq(
-    $(".dinner .menu-item, [data-meal='dinner'] .menu-item")
-      .map((_, el) => $(el).text())
-      .get()
-  );
+  const totalItems = mealPlan.reduce((sum, meal) => {
+    const item = menus[meal.key];
+    return sum + item.classicKitchen.length + item.globalFare.length;
+  }, 0);
 
-  // 如果没抓到内容，不覆盖已有文件
-  if (!breakfast.length && !lunch.length && !dinner.length) {
-    console.log("No items parsed. Keep existing menu.json");
+  if (!totalItems) {
+    console.log("No target section items parsed. Keep existing menu.json");
     return;
   }
 
   const payload = {
     updatedAt: new Date().toISOString(),
-    source: "stjacademy.campus-dining.com",
-    menus: {
-      Breakfast: breakfast,
-      Lunch: lunch,
-      Dinner: dinner
-    }
+    source: "menus.tenkites.com",
+    menuDate: date,
+    menus
   };
 
   await fs.writeFile(OUT, JSON.stringify(payload, null, 2) + "\n", "utf8");

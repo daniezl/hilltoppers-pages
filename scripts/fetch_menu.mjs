@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import cheerio from "cheerio";
+import { load } from "cheerio";
 
 const URL = "https://stjacademy.campus-dining.com/menus/";
 const OUT = "data/menu.json";
@@ -13,17 +13,32 @@ async function main() {
       "accept-language": "en-US,en;q=0.9"
     }
   });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}`);
+  }
 
   const html = await res.text();
-  const $ = cheerio.load(html);
+  const $ = load(html);
 
-  // 第一版选择器，后面可按页面结构微调
-  const breakfast = uniq($(".breakfast .menu-item, [data-meal='breakfast'] .menu-item").map((_, el) => $(el).text()).get());
-  const lunch = uniq($(".lunch .menu-item, [data-meal='lunch'] .menu-item").map((_, el) => $(el).text()).get());
-  const dinner = uniq($(".dinner .menu-item, [data-meal='dinner'] .menu-item").map((_, el) => $(el).text()).get());
+  // 第一版选择器，后续可按页面结构微调
+  const breakfast = uniq(
+    $(".breakfast .menu-item, [data-meal='breakfast'] .menu-item")
+      .map((_, el) => $(el).text())
+      .get()
+  );
+  const lunch = uniq(
+    $(".lunch .menu-item, [data-meal='lunch'] .menu-item")
+      .map((_, el) => $(el).text())
+      .get()
+  );
+  const dinner = uniq(
+    $(".dinner .menu-item, [data-meal='dinner'] .menu-item")
+      .map((_, el) => $(el).text())
+      .get()
+  );
 
-  // 抓空则不覆盖
+  // 如果没抓到内容，不覆盖已有文件
   if (!breakfast.length && !lunch.length && !dinner.length) {
     console.log("No items parsed. Keep existing menu.json");
     return;
@@ -43,7 +58,7 @@ async function main() {
   console.log("menu.json updated");
 }
 
-main().catch((e) => {
-  console.error(e);
+main().catch((err) => {
+  console.error(err);
   process.exit(1);
 });

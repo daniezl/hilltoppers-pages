@@ -1,54 +1,51 @@
 {
-  "updatedAt": "2026-04-14T02:43:43.512Z",
+  "updatedAt": "2026-04-14T05:26:00.863Z",
   "source": "menus.tenkites.com",
-  "menuDate": "2026-04-13",
+  "menuDate": "2026-04-14",
   "menus": {
     "breakfast": {
       "classicKitchen": [
-        "Sandwich Biscuit Bacon/Egg/Cheese IW 5.8",
-        "Egg and Cheese Biscuit",
-        "Sausage & Cheese Biscuit"
+        "Mild Shredded Cheddar Cheese",
+        "Cheese Omelet",
+        "Sliced Smoked Ham",
+        "Red Onions",
+        "Bell Peppers",
+        "Bacon Bits",
+        "Shredded Mozzarella Cheese"
       ],
       "globalFare": [
+        "Cinnamon French Toast Homemade",
+        "Corned Beef Hash",
         "Scrambled Eggs",
-        "Buttermilk Pancake(s)",
-        "Sausage Patty",
-        "Hashbrown Patty"
+        "Home Fried Potatoes"
       ]
     },
     "lunch": {
       "classicKitchen": [
-        "Noodles Ramen Vegetarian Miso",
-        "Pork Ramen Noodle Bowl",
-        "Pork With Orange & Ginger",
-        "Broccoli & Mushroom Vegetarian Stir Fry",
-        "Noodle Ramen Cooked"
+        "Fried Chicken Drumsticks",
+        "Baked Beans",
+        "Red Skin Mashed Potatoes",
+        "Honey Buttered Baby Carrots"
       ],
       "globalFare": [
-        "Furikake",
-        "Huli Huli Chicken",
-        "Broccoli & Mushroom Vegetarian Stir Fry",
-        "Black Beans",
-        "Seasoned French Fries"
+        "Sweet Potato Pulled Pork BBQ Bowl",
+        "Canned Dark Red Kidney Beans",
+        "Sweet Potato Fries",
+        "Sautéed Garlic Kale"
       ]
     },
     "dinner": {
       "classicKitchen": [
-        "Seasoned Ground Beef",
-        "Roll Dinner Hawaiian",
-        "Red Skin Mashed Potatoes",
-        "Sautéed Corn and Onions",
-        "Peas & Carrots",
-        "Brown Gravy",
-        "Green Salad"
+        "Country Fried Steak",
+        "Scalloped Potatoes",
+        "Roasted Asparagus",
+        "Fresh Roasted Green Beans"
       ],
       "globalFare": [
-        "Vegetable & Pork Potsticker",
-        "Potsticker Vegetable 1 Oz Fzn App",
-        "Chicken Potstickers",
-        "Vegetable Egg Roll",
-        "Sugar Snap Peas with Red Peppers",
-        "Fortune Cookie"
+        "Roasted Tomatoes & Zucchini",
+        "Chicken, Shrimp, and Sausage Jambalaya",
+        "French Bread",
+        "Jasmine Rice"
       ]
     }
   }

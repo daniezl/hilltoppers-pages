@@ -261,5 +261,83 @@
   },
   "2026-04-01": {
     "type": "late_start"
+  },
+  "2026-04-16": {
+    "type": "custom",
+    "details": "Fashion Show Schedule",
+    "schedule": [
+      {
+        "name": "9/10 Fashion Show, 11/12 Advisor Meetings",
+        "start": "8:00",
+        "end": "8:30"
+      },
+      {
+        "name": "11/12 Fashion Show, 9/10 Advisor Meetings",
+        "start": "8:40",
+        "end": "9:10"
+      },
+      {
+        "name": "A Block",
+        "start": "9:20",
+        "end": "10:10"
+      },
+      {
+        "name": "B Block",
+        "start": "10:15",
+        "end": "11:05"
+      },
+      {
+        "name": "C Block",
+        "start": "11:10",
+        "end": "12:55",
+        "subBlocks": [
+          {
+            "name": "Lunch 1",
+            "start": "11:05",
+            "end": "11:35"
+          },
+          {
+            "name": "Lunch 2",
+            "start": "11:25",
+            "end": "11:55"
+          },
+          {
+            "name": "Lunch 3",
+            "start": "11:45",
+            "end": "12:15"
+          },
+          {
+            "name": "Lunch 4",
+            "start": "12:05",
+            "end": "12:35"
+          },
+          {
+            "name": "Lunch 5",
+            "start": "12:25",
+            "end": "12:55"
+          }
+        ]
+      },
+      {
+        "name": "D Block",
+        "start": "13:00",
+        "end": "13:50"
+      },
+      {
+        "name": "E Block",
+        "start": "13:55",
+        "end": "14:45"
+      },
+      {
+        "name": "Conference Period",
+        "start": "14:50",
+        "end": "15:10"
+      },
+      {
+        "name": "Interdisciplinary Time",
+        "start": "15:10",
+        "end": "15:30"
+      }
+    ]
   }
 }

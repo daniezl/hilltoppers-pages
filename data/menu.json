@@ -1,54 +1,46 @@
 {
-  "updatedAt": "2026-04-13T17:55:06.750Z",
+  "updatedAt": "2026-04-15T12:11:41.264Z",
   "source": "menus.tenkites.com",
-  "menuDate": "2026-04-13",
+  "menuDate": "2026-04-15",
   "menus": {
     "breakfast": {
       "classicKitchen": [
-        "Sandwich Biscuit Bacon/Egg/Cheese IW 5.8",
-        "Egg and Cheese Biscuit",
-        "Sausage & Cheese Biscuit"
+        "Bacon Egg and Cheese Croissant",
+        "Egg and Cheese Croissant",
+        "Sausage and Egg Croissant"
       ],
       "globalFare": [
         "Scrambled Eggs",
-        "Buttermilk Pancake(s)",
-        "Sausage Patty",
+        "Chicken Sausage Patty",
+        "Belgian Waffle w/ Powder Sugar & Syrup",
         "Hashbrown Patty"
       ]
     },
     "lunch": {
       "classicKitchen": [
-        "Noodles Ramen Vegetarian Miso",
-        "Pork Ramen Noodle Bowl",
-        "Pork With Orange & Ginger",
-        "Broccoli & Mushroom Vegetarian Stir Fry",
-        "Noodle Ramen Cooked"
+        "Grilled Chicken Breast",
+        "Penne Pasta with Alfredo Sauce",
+        "Garlic Bread",
+        "Fresh Roasted Broccoli"
       ],
       "globalFare": [
-        "Furikake",
-        "Huli Huli Chicken",
-        "Broccoli & Mushroom Vegetarian Stir Fry",
-        "Black Beans",
-        "Seasoned French Fries"
+        "Sloppy Joe Beef",
+        "Curly Fries",
+        "Buttered Corn"
       ]
     },
     "dinner": {
       "classicKitchen": [
-        "Seasoned Ground Beef",
-        "Roll Dinner Hawaiian",
-        "Red Skin Mashed Potatoes",
-        "Sautéed Corn and Onions",
-        "Peas & Carrots",
-        "Brown Gravy",
-        "Green Salad"
+        "Greek-Marinated Grilled Chicken",
+        "Pita Bread",
+        "Roasted Yellow Squash",
+        "Roasted Chickpeas"
       ],
       "globalFare": [
-        "Vegetable & Pork Potsticker",
-        "Potsticker Vegetable 1 Oz Fzn App",
-        "Chicken Potstickers",
-        "Vegetable Egg Roll",
-        "Sugar Snap Peas with Red Peppers",
-        "Fortune Cookie"
+        "Orange Chipotle Tilapia",
+        "French Bread",
+        "Jasmine Rice",
+        "Honey Roasted Brussel Sprouts"
       ]
     }
   }

@@ -1,51 +1,46 @@
 {
-  "updatedAt": "2026-04-15T03:48:18.883Z",
+  "updatedAt": "2026-04-15T06:01:17.925Z",
   "source": "menus.tenkites.com",
-  "menuDate": "2026-04-14",
+  "menuDate": "2026-04-15",
   "menus": {
     "breakfast": {
       "classicKitchen": [
-        "Mild Shredded Cheddar Cheese",
-        "Cheese Omelet",
-        "Sliced Smoked Ham",
-        "Red Onions",
-        "Bell Peppers",
-        "Bacon Bits",
-        "Shredded Mozzarella Cheese"
+        "Bacon Egg and Cheese Croissant",
+        "Egg and Cheese Croissant",
+        "Sausage and Egg Croissant"
       ],
       "globalFare": [
-        "Cinnamon French Toast Homemade",
-        "Corned Beef Hash",
         "Scrambled Eggs",
-        "Home Fried Potatoes"
+        "Chicken Sausage Patty",
+        "Belgian Waffle w/ Powder Sugar & Syrup",
+        "Hashbrown Patty"
       ]
     },
     "lunch": {
       "classicKitchen": [
-        "Fried Chicken Drumsticks",
-        "Baked Beans",
-        "Red Skin Mashed Potatoes",
-        "Honey Buttered Baby Carrots"
+        "Grilled Chicken Breast",
+        "Penne Pasta with Alfredo Sauce",
+        "Garlic Bread",
+        "Fresh Roasted Broccoli"
       ],
       "globalFare": [
-        "Sweet Potato Pulled Pork BBQ Bowl",
-        "Kidney Beans",
-        "Sweet Potato Fries",
-        "Sautéed Garlic Kale"
+        "Sloppy Joe Beef",
+        "Curly Fries",
+        "Buttered Corn"
       ]
     },
     "dinner": {
       "classicKitchen": [
-        "Country Fried Steak",
-        "Scalloped Potatoes",
-        "Roasted Asparagus",
-        "Fresh Roasted Green Beans"
+        "Greek-Marinated Grilled Chicken",
+        "Pita Bread",
+        "Roasted Yellow Squash",
+        "Roasted Chickpeas"
       ],
       "globalFare": [
-        "Roasted Tomatoes & Zucchini",
-        "Chicken, Shrimp, and Sausage Jambalaya",
+        "Orange Chipotle Tilapia",
         "French Bread",
-        "Jasmine Rice"
+        "Jasmine Rice",
+        "Honey Roasted Brussel Sprouts"
       ]
     }
   }
